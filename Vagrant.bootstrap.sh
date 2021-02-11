@@ -26,7 +26,7 @@ fi
 # ruta raíz del servidor web
 APACHE_ROOT="/var/www"
 # ruta de la aplicación
-APP_PATH="$APACHE_ROOT/aplicacion-devops"
+APP_PATH="$APACHE_ROOT/aplicacion-devops/public"
 
 
 ## configuración servidor web
