@@ -8,7 +8,7 @@ services:
       - "./configs/httpd/devops.site.conf:/etc/apache2/sites-available/000-default.conf"
       - "./configs/app/.env:/var/www/html/myapp/.env"
       - "./configs/app/config_app.sh:/tmp/config_app.sh"
-      - "/var/www/aplicacion-devops/public:/var/www/aplicacion-devops/public"
+      - "/var/www/aplicacion-devops/public:/var/www/html"
     ports:
       - "8080:80" 
     depends_on:
