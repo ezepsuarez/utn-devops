@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   # solapen los puertos con los de nuestra equipo en el caso de que ese número de puerto este en uso.
 
   config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 4400, host: 4400
+  config.vm.network "forwarded_port", guest: 3306, host: 4400
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
