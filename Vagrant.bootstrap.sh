@@ -43,7 +43,7 @@ fi
 # ruta raíz del servidor web
 APACHE_ROOT="/var/www"
 # ruta de la aplicación
-APP_PATH="$APACHE_ROOT/utn-devops-app/"
+APP_PATH="$APACHE_ROOT/aplicacion-devops/public"
 
 # descargo la app del repositorio
 if [ ! -d  $APACHE_ROOT ]; then
