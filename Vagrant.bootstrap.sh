@@ -50,7 +50,7 @@ if [ ! -d  $APACHE_ROOT ]; then
 	sudo mkdir $APACHE_ROOT
 fi
 cd $APACHE_ROOT
-sudo git clone https://github.com/Fichen/utn-devops-app.git
+sudo git clone https://github.com/ezepsuarez/aplicacion-devops.git
 cd $APP_PATH
 sudo git checkout unidad-2
 
