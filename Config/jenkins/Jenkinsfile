@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh 'git clone https://github.com/drmonkeyninja/phpunit-simple-example.git || true'
                 sh 'cd phpunit-simple-example && sudo git checkout master'
-                sh 'composer clear-cache'
+                sh 'sudo composer clear-cache'
                 sh 'cd phpunit-simple-example && sudo /usr/local/bin/composer install --no-scripts'
                 sh 'sudo chmod 777 -R ./phpunit-simple-example/'
             }
