@@ -7,12 +7,12 @@ pipeline {
                 sh 'git clone https://github.com/drmonkeyninja/phpunit-simple-example.git || true'
                 sh 'cd phpunit-simple-example && sudo git checkout master'
                 sh 'cd phpunit-simple-example && sudo /usr/local/bin/composer install --no-scripts'
-                sh 'sudo chmod 777 ./phpunit-simple-example/bootstrap/cache/'
+                sh 'sudo chmod 777 -R ./phpunit-simple-example/'
             }
         }
         stage('Build') {
             steps {
-                sh 'find . -path ./phpunit-simple-example/vendor -prune -o -name \\*.php -exec php -l "{}" \\;'
+                sh 'find ./ -path ./phpunit-simple-example/vendor -prune -o -name *.php -exec php -l {} \;'
                 retry(2) {
                     sh 'cd phpunit-simple-example && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
                 }
