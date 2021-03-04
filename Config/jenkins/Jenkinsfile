@@ -4,24 +4,24 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                sh 'git clone https://github.com/drmonkeyninja/phpunit-simple-example.git || true'
-                sh 'cd phpunit-simple-example && sudo git checkout master'
+                sh 'git clone https://github.com/ezepsuarez/aplicacion-devops.git || true'
+                sh 'cd aplicacion-devops && sudo git checkout unidad-2-app'
                 sh 'sudo composer clear-cache'
-                sh 'cd phpunit-simple-example && sudo /usr/local/bin/composer install --no-scripts'
-                sh 'sudo chmod 777 -R ./phpunit-simple-example/'
+                sh 'cd aplicacion-devops && sudo /usr/local/bin/composer install --no-scripts'
+                sh 'sudo chmod 777 -R ./aplicacion-devops/'
             }
         }
         stage('Build') {
             steps {
-                sh 'find ./ -path ./phpunit-simple-example/vendor -prune -o -name *.php -exec php -l {} \\;'
+                sh 'find ./ -path ./aplicacion-devops/vendor -prune -o -name *.php -exec php -l {} \\;'
                 retry(2) {
-                    sh 'cd phpunit-simple-example && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
+                    sh 'cd aplicacion-devops && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
                 }
             }
         }
         stage('Test') {
             steps {
-                sh './phpunit-simple-example/vendor/bin/phpunit -c ./phpunit-simple-example/phpunit.xml'
+                sh './aplicacion-devops/vendor/bin/phpunit -c ./aplicacion-devops/phpunit.xml'
             }
         }
     }
