@@ -4,25 +4,23 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                sh 'sudo rm -fr .git && git clone https://github.com/ezepsuarez/aplicacion-devops.git || true'
-                sh 'cd aplicacion-devops && sudo git checkout unidad-2-app'
-                sh 'cd aplicacion-devops/ && sudo /usr/local/bin/composer install --no-scripts'
-                sh ' ls -l ./aplicacion-devops/bootstrap/'
-                sh 'sudo chmod 777 -R ./aplicacion-devops/'
+                sh 'git clone https://github.com/ezepsuarez/aplicacion-devops.git || true'
+                sh 'cd aplicacion-devops-app && sudo git checkout unidad-2'
+                sh 'cd aplicacion-devops-app/myapp && sudo /usr/local/bin/composer install --no-scripts'
+                sh 'chmod 777 ./aplicacion-devops-app/myapp/bootstrap/cache/'
             }
         }
         stage('Build') {
             steps {
-                sh ' echo "*************************************************************************************************" '
-                sh 'find . -path ./aplicacion-devops/vendor -prune -o -name \\*.php -exec php -l "{}" \\;'
+                sh 'find . -path ./aplicacion-devops-app/myapp/vendor -prune -o -name \\*.php -exec php -l "{}" \\;'
                 retry(2) {
-                    sh 'cd aplicacion-devops && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
+                    sh 'cd aplicacion-devops-app/myapp && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
                 }
             }
         }
         stage('Test') {
             steps {
-                sh './aplicacion-devops/vendor/bin/phpunit -c ./aplicacion-devops/phpunit.xml'
+                sh './aplicacion-devops-app/myapp/vendor/bin/phpunit -c ./aplicacion-devops-app/myapp/phpunit.xml'
             }
         }
     }
