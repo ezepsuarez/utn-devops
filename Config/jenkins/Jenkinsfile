@@ -7,7 +7,7 @@ pipeline {
                 sh 'git clone https://github.com/ezepsuarez/aplicacion-devops.git || true'
                 sh 'cd aplicacion-devops && sudo git checkout unidad-2-app'
                 sh 'cd aplicacion-devops/ && sudo /usr/local/bin/composer install --no-scripts'
-                sh ' ls -l ./aplicacion-devops/'
+                sh ' ls -l ./aplicacion-devops/bootstrap/'
                 sh 'chmod -R 777 ./aplicacion-devops/bootstrap/'
             }
         }
