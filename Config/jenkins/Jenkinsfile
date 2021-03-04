@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'find ./ -path ./phpunit-simple-example/vendor -prune -o -name *.php -exec php -l {} \;'
+                sh 'find ./ -path ./phpunit-simple-example/vendor -prune -o -name *.php -exec php -l {} \\;'
                 retry(2) {
                     sh 'cd phpunit-simple-example && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
                 }
