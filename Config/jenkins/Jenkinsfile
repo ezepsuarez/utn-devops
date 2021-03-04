@@ -22,6 +22,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh ' ls -l ./aplicacion-devops/vendor/bin/'
                 sh './aplicacion-devops/vendor/bin/phpunit -c ./aplicacion-devops/phpunit.xml'
             }
         }
