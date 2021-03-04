@@ -4,23 +4,23 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                sh 'git clone https://github.com/durgas09/Laravel-5.6-PHP-7.2-Passport-Booking-System.git || true'
-                sh 'cd Laravel-5.6-PHP-7.2-Passport-Booking-System && sudo git checkout master'
-                sh 'cd Laravel-5.6-PHP-7.2-Passport-Booking-System && sudo /usr/local/bin/composer install --no-scripts'
-                sh 'sudo chmod 777 ./Laravel-5.6-PHP-7.2-Passport-Booking-System/bootstrap/cache/'
+                sh 'git clone https://github.com/drmonkeyninja/phpunit-simple-example.git || true'
+                sh 'cd phpunit-simple-example && sudo git checkout master'
+                sh 'cd phpunit-simple-example && sudo /usr/local/bin/composer install --no-scripts'
+                sh 'sudo chmod 777 ./phpunit-simple-example/bootstrap/cache/'
             }
         }
         stage('Build') {
             steps {
-                sh 'find . -path ./Laravel-5.6-PHP-7.2-Passport-Booking-System/vendor -prune -o -name \\*.php -exec php -l "{}" \\;'
+                sh 'find . -path ./phpunit-simple-example/vendor -prune -o -name \\*.php -exec php -l "{}" \\;'
                 retry(2) {
-                    sh 'cd Laravel-5.6-PHP-7.2-Passport-Booking-System && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
+                    sh 'cd phpunit-simple-example && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
                 }
             }
         }
         stage('Test') {
             steps {
-                sh './Laravel-5.6-PHP-7.2-Passport-Booking-System/vendor/bin/phpunit -c ./Laravel-5.6-PHP-7.2-Passport-Booking-System/phpunit.xml'
+                sh './phpunit-simple-example/vendor/bin/phpunit -c ./phpunit-simple-example/phpunit.xml'
             }
         }
     }
