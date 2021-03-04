@@ -8,7 +8,7 @@ pipeline {
                 sh 'cd aplicacion-devops && sudo git checkout unidad-2-app'
                 sh 'cd aplicacion-devops/ && sudo /usr/local/bin/composer install --no-scripts'
                 sh ' ls -l ./aplicacion-devops/bootstrap/'
-                sh 'chmod -R 777 ./aplicacion-devops/bootstrap/'
+                sh 'sudo chmod 777 -R ./aplicacion-devops/bootstrap/'
             }
         }
         stage('Build') {
