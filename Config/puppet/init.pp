@@ -32,7 +32,7 @@ package { 'docker-compose':
 
 # Aprovisionamiento de configuración para la aplicación. Con esta declaracion
 # se transfiere un archivo del servidor Puppet Master al nodo que contiene el agente
-file { "/var/www/utn-devops-app/myapp/.env":
+file { "/var/www/aplicacion-devops/.env":
   mode => "0644",
     owner => 'root',
     group => 'root',
