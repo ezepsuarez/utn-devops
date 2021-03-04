@@ -4,23 +4,23 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                sh 'git clone https://github.com/ezepsuarez/aplicacion-devops.git || true'
-                sh 'cd aplicacion-devops && sudo git checkout unidad-2'
-                sh 'cd aplicacion-devops/myapp && sudo /usr/local/bin/composer install --no-scripts'
-                sh 'sudo chmod 777 ./aplicacion-devops/myapp/bootstrap/cache/'
+                sh 'git clone https://github.com/prooph/laravel-example.git || true'
+                sh 'cd laravel-example && sudo git checkout master'
+                sh 'cd laravel-example && sudo /usr/local/bin/composer install --no-scripts'
+                sh 'sudo chmod 777 ./laravel-example/bootstrap/cache/'
             }
         }
         stage('Build') {
             steps {
-                sh 'find . -path ./aplicacion-devops/myapp/vendor -prune -o -name \\*.php -exec php -l "{}" \\;'
+                sh 'find . -path ./laravel-example/vendor -prune -o -name \\*.php -exec php -l "{}" \\;'
                 retry(2) {
-                    sh 'cd aplicacion-devops/myapp && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
+                    sh 'cd laravel-example && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
                 }
             }
         }
         stage('Test') {
             steps {
-                sh './aplicacion-devops/myapp/vendor/bin/phpunit -c ./aplicacion-devops/myapp/phpunit.xml'
+                sh './laravel-example/vendor/bin/phpunit -c ./laravel-example/phpunit.xml'
             }
         }
     }
