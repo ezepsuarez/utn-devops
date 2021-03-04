@@ -15,7 +15,8 @@ pipeline {
             steps {
                 sh 'find . -path ./aplicacion-devops/vendor -prune -o -name \\*.php -exec php -l "{}" \\;'
                 retry(2) {
-                    sh 'cd aplicacion-devops && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
+                    //sh 'cd aplicacion-devops && sudo /usr/local/bin/composer update --no-scripts --prefer-dist'
+                    sh 'composer create-project aplicacion-devops sample-app --prefer-dist'
                 }
             }
         }
