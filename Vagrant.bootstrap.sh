@@ -1,5 +1,5 @@
 #!/bin/bash
-
+##prueba
 ### Aprovisionamiento de software ###
 
 # Actualizo los paquetes de la maquina virtual
